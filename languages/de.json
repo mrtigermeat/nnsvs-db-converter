@@ -1,0 +1,9 @@
+{
+    "vowels" : ["a", "eh", "e", "ih", "i", "oh", "o", "oe", "oeh", "uh", "u", "ueh", "ue", "ex", "er", "au", "ei", "eu", "vtrash"],
+    "liquids" : {
+        "l": ["b", "d", "f", "g", "k", "p", "s", "t", "v", "sh"],
+        "y": ["b", "d", "f", "g", "k", "p", "t", "v", "z", "sh"],
+        "r": ["b", "f", "g", "k", "p", "th", "v", "s", "sh"],
+        "w": ["b", "d", "f", "g", "k", "p", "s", "t", "th", "v", "sh"]
+    } 
+}

@@ -1,0 +1,35 @@
+# General settings
+
+num_processes: 1
+
+# Segmentation Options
+
+max_length: 15
+max_length_relaxation_factor: 0.1
+max_silences: 0
+audio_sample_rate: 44100
+
+# MIDI Estimation
+
+estimate_midi: true
+use_cents: true
+pe: parselmouth # parselmouth or harvest
+pe_ckpt: null # for future pe implementation
+time_step: 0.005
+f0_min: 40
+f0_max: 1100
+voicing_threshold_midi: 0.45
+
+# Breath detection options
+
+detect_breaths: true
+voicing_threshold_breath: 0.6
+breath_window_size: 0.05
+breath_min_length: 0.1
+breath_db_threshold: 60.0
+breath_centroid_threshold: 2000.0
+
+# Output Options
+
+write_ds: false
+write_labels: false

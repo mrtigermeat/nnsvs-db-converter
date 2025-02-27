@@ -1,0 +1,8 @@
+numpy
+scipy
+soundfile
+praat-parselmouth
+pyworld
+librosa
+click
+loguru
