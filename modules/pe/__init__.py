@@ -1,15 +1,13 @@
 from .pm import ParselmouthPE
 from .pw import HarvestPE
-
-parselmouth_names = ['parselmouth', 'pm']
-harvest_names = ['harvest', 'pw']
+from .rmvpe import RMVPE
 
 def initialize_pe(hparams):
-	pe = hparams.pe
-	pe_ckpt = hparams.pe_ckpt
-	if pe.lower() in parselmouth_names:
+	if hparams.pe.lower() == 'parselmouth':
 		return ParselmouthPE()
-	elif pe.lower() in harvest_names:
+	elif hparams.pe.lower() == 'harvest':
 		return HarvestPE()
+	elif hparams.pe.lower() == 'rmvpe':
+		return RMVPE(hparams.pe_ckpt)
 	else:
-		raise ValueError(f"Unknown PE: {pe}")
+		raise ValueError(f"Unknown PE: {hparams.pe}")

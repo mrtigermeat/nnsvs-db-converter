@@ -23,12 +23,13 @@ from utils.log import logging, set_logger
 @click.option('--language-def', '-L', required=False, type=str, metavar='path', help='The path of the language definition .json file.')
 @click.option('--db_name', '-n', required=False, type=str, default='diffsinger_db', help='The name of the folder output.')
 @click.option('--debug', '-d', is_flag=True, help='Show debug logs.')
-def convert_db(path: str, config: str, language_def: str, debug: bool):
+def convert_db(path: str, config: str, language_def: str, db_name: str, debug: bool):
     try:
         set_logger(debug)
 
         hparams = hparam(config=config)
-        logging.debug(hparams.keys)
+        if debug:
+            hparams.print_keys()
 
         # find proper language json
         if language_def:

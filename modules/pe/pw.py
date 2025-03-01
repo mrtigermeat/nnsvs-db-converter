@@ -2,14 +2,13 @@ import pyworld as pw
 import numpy as np
 
 from .base_pe import PE
-from utils import hparams
 
 class HarvestPE(PE):
-    def get_pitch(self, x, fs):
-        time_step = hparams['time_step']
-        f0_min = hparams['f0_min']
-        f0_max = hparams['f0_max']
-        voicing_threshold = hparams['voicing_threshold_midi']
+    def get_pitch(self, x, fs, hparams):
+        time_step = hparams.time_step
+        f0_min = hparams.f0_min
+        f0_max = hparams.f0_max
+        voicing_threshold = hparams.voicing_threshold_midi
 
         length = int(x.size / (time_step * fs))
         time_step *= 1000

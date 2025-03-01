@@ -4,6 +4,9 @@ import math
 import parselmouth as pm
 import librosa
 
+# no clue how else to solve the circular imports lmao
+from utils.conv_tools import get_pitch
+
 class Segment: # should've been named segment in hindsight...
     def __init__(self, labels):
         self.labels = deepcopy(labels) # list of Labels
@@ -408,6 +411,3 @@ class Segment: # should've been named segment in hindsight...
                     resegment.append(curr)
 
         return resegment
-
-# no clue how else to solve the circular imports lmao
-from .conv_tools import *

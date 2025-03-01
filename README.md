@@ -4,10 +4,11 @@ This fork of the nnsvs-db-converter is meant to coexist with the original to pro
 - Uses a config over CLI
 - A few different libraries, like loguru and click over logging and argparser
 - Code is easier to deploy into other tools and such
+- Implemented RMVPE pitch extractor (~55% faster than Harvest on 1 thread)
 ## Planned/WIP features
-- Implement RMVPE PE
 - Implement direct SOME inference (for less steps, basically)
 - Implement some audio cleanup stuff (fade beginning and end of segments very slightly, etc)
+- Batch conversion. Maybe using a config? Maybe not? who knows... (i do)
 - Update/add more documentation
 
 ## Main Usage
@@ -15,7 +16,17 @@ This fork of the nnsvs-db-converter is meant to coexist with the original to pro
 ### Through Python (Conda recommeneded for Windows)
  1. Create an environment: `conda create -n db_converter python=3.12 -y`
  2. Install the requirements: `pip install -r requirements.txt`
- 3. Run the script as follows (this is an example script): `python db_converter.py -L en {PATH_TO_NNSVS_DB}`
+ 3. If using RMVPE as your pitch-extractor, install [torch](https://pytorch.org/get-started/locally/) manually and put the [RMVPE model](https://drive.google.com/file/d/1D3ePcade-pxUR3BKTDnQJnwP7O4gz2kb/view?usp=sharing) in the checkpoints folder as so: `checkpoints/rmvpe/model.pt`
+ 4. Update the config file to your preferences.
+ 5. Run the script as follows (this is an example script): `python db_converter.py -L en {PATH_TO_NNSVS_DB}`
+
+Current CLI options:
+`-c {path_to_config}`: custom config, otherwise pulls from the default `base.yaml` in configs folder.
+`-n {NAME}`: Name to give the output folder, instead of "diffsinger_db"
+`-L {lang code/path to .json}`: Language definition. If you type a language code (en, zh_tgm, etc) it will pick from preloaded languages in the 'languages' folder. Otherwise, it will be looking for a .json file.
+`-d`: Print debug messages
+
+Any other settings that were CLI in the original can be found in the config files, including new parameters for features not in the original.
 
 All of the following is from the original and has not been updated for this version yet.
 

@@ -1,12 +1,12 @@
 import soundfile as sf
 import numpy as np
 
-from .segment import Segment
-from .log import logging
-from .label import Label
+from utils.log import logging
+from utils.label import Label
 from modules.pe import initialize_pe
 
 def combine_labels(labels): # combining labels that pau boundaries
+    from utils.segment import Segment
     if len(labels) == 1:
         return labels[0]
 
@@ -23,6 +23,7 @@ def label_from_line(line): # yeah..
     return Label(s, e, p)
 
 def read_label(path): # yeah..
+    from utils.segment import Segment
     labels = []
     for line in open(path).readlines():
         labels.append(label_from_line(line))
@@ -66,6 +67,21 @@ def interp_f0(f0, uv=None):
     elif sum(uv) > 0:
         f0[uv] = np.interp(np.where(uv)[0], np.where(~uv)[0], f0[~uv])
     return denorm_f0(f0, uv=None), uv
+
+def resample_align_curve(points: np.ndarray, original_timestep: float, target_timestep: float, align_length: int):
+    t_max = (len(points) - 1) * original_timestep
+    curve_interp = np.interp(
+        np.arange(0, t_max, target_timestep),
+        original_timestep * np.arange(len(points)),
+        points
+    ).astype(points.dtype)
+    delta_l = align_length - len(curve_interp)
+    if delta_l < 0:
+        curve_interp = curve_interp[:align_length]
+    elif delta_l > 0:
+        curve_interp = np.concatenate((curve_interp, np.full(delta_l, fill_value=curve_interp[-1])), axis=0)
+    return curve_interp
+
 
 
 def write_ds(loc, wav, fs, pitch='parselmouth', time_step=0.005, f0_min=40, f0_max=1100, voicing_threshold=0.45, **kwargs):

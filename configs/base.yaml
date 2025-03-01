@@ -13,12 +13,13 @@ audio_sample_rate: 44100
 
 estimate_midi: true
 use_cents: true
-pe: parselmouth # parselmouth or harvest
-pe_ckpt: null # for future pe implementation
+pe: rmvpe # parselmouth, harvest or rmvpe
+pe_ckpt: checkpoints/rmvpe/model.pt # rmvpe checkpoint
 time_step: 0.005
 f0_min: 40
 f0_max: 1100
 voicing_threshold_midi: 0.45
+interp_uv: False
 
 # Breath detection options
 

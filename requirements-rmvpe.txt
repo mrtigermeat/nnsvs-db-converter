@@ -1,0 +1,5 @@
+# highly recommend downloading manually from https://pytorch.org/get-started/locally/
+
+torch
+torchvision
+torchaudio

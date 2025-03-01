@@ -6,3 +6,4 @@ pyworld
 librosa
 click
 loguru
+colorama
