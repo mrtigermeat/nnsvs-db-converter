@@ -1,21 +1,23 @@
 import yaml
+from colorama import Fore, Style
+from colorama import init as init_colorama
 
 class hparam:
 	def __init__(self, config: str = None, **kwargs):
 		super().__init__()
+		init_colorama()
 		self.H = {}
 		self.load_config(config)
 
-	@property
-	def keys(self) -> str:
+	def print_keys(self) -> str:
 		'''
 		Print out hparams by calling "hparams.keys"
 		'''
 		keys = ""
-		keys += "Hparams\n"
+		keys += "Hparams: "
 		for k, v in self.H.items():
-			keys += f"{k}: {v}, " 
-		return keys
+			keys += Style.RESET_ALL + "[" + Fore.YELLOW + f"{k}" + Style.RESET_ALL + ": " + Fore.CYAN + f"{v}" + Style.RESET_ALL + "], "  
+		print(keys)
 			
 	def load_config(self, config_path):
 		try:
@@ -34,3 +36,8 @@ class hparam:
 			self.__setattr__(key, new_value)
 		except:
 			print(f"Unable to update key: {key} to new value: {new_value}")
+
+if __name__ == "__main__":
+	hparams = hparam('../configs/base.yaml')
+
+	hparams.print_keys()
