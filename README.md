@@ -5,15 +5,10 @@ This fork of the nnsvs-db-converter is meant to coexist with the original to pro
 - A few different libraries, like loguru and click over logging and argparser
 - Code is easier to deploy into other tools and such
 ## Planned/WIP features
-- Finish reorganizing code
 - Implement RMVPE PE
 - Implement direct SOME inference (for less steps, basically)
-
-# Information
- This is a Python script for converting singing databases with HTS mono labels into the DiffSinger format. This Python script deals with sample segmentation to mostly ensure that samples have a maximum given length and a maximum amount of pauses in between. The recognized silence phonemes by this script are `sil`, `pau`, and `SP`. `AP` and `br` are special symbols considered as breaths. All silences turn into `SP` and all breaths turn into `AP`. It also assumes the labels have silences labeled at the start and end.
- 
- This Python script only requires six external libraries to work, unlike the existing one which needs the NNSVS library, which might be hard to install for most people.
-# How to Use
+- Implement some audio cleanup stuff (fade beginning and end of segments very slightly, etc)
+- Update/add more documentation
 
 ## Main Usage
 
@@ -23,6 +18,12 @@ This fork of the nnsvs-db-converter is meant to coexist with the original to pro
  3. Run the script as follows (this is an example script): `python db_converter.py -L en {PATH_TO_NNSVS_DB}`
 
 All of the following is from the original and has not been updated for this version yet.
+
+# Information
+ This is a Python script for converting singing databases with HTS mono labels into the DiffSinger format. This Python script deals with sample segmentation to mostly ensure that samples have a maximum given length and a maximum amount of pauses in between. The recognized silence phonemes by this script are `sil`, `pau`, and `SP`. `AP` and `br` are special symbols considered as breaths. All silences turn into `SP` and all breaths turn into `AP`. It also assumes the labels have silences labeled at the start and end.
+ 
+ This Python script only requires six external libraries to work, unlike the existing one which needs the NNSVS library, which might be hard to install for most people.
+# How to Use
 
 ## Example commands
 
