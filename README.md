@@ -21,10 +21,10 @@ This fork of the nnsvs-db-converter is meant to coexist with the original to pro
  5. Run the script as follows (this is an example script): `python db_converter.py -L en {PATH_TO_NNSVS_DB}`
 
 Current CLI options:
-`-c {path_to_config}`: custom config, otherwise pulls from the default `base.yaml` in configs folder.
-`-n {NAME}`: Name to give the output folder, instead of "diffsinger_db"
-`-L {lang code/path to .json}`: Language definition. If you type a language code (en, zh_tgm, etc) it will pick from preloaded languages in the 'languages' folder. Otherwise, it will be looking for a .json file.
-`-d`: Print debug messages
+ - `-c {path_to_config}`: custom config, otherwise pulls from the default `base.yaml` in configs folder.
+ - `-n {NAME}`: Name to give the output folder, instead of "diffsinger_db"
+ - `-L {lang code/path to .json}`: Language definition. If you type a language code (en, zh_tgm, etc) it will pick from preloaded languages in the 'languages' folder. Otherwise, it will be looking for a .json file.
+ - `-d`: Print debug messages
 
 Any other settings that were CLI in the original can be found in the config files, including new parameters for features not in the original.
 
