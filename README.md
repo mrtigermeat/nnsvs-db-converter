@@ -1,5 +1,14 @@
 # nnsvs-db-converter
- Python script to convert NNSVS DBs to DiffSinger without needing the NNSVS Python Library.
+This fork of the nnsvs-db-converter is meant to coexist with the original to provide a more advanced experience, while sacrificing portability & ease of use. All guides assume you understand how to use Python and/or Conda. If anything in this guide does not make sense, please refer to the original!
+## Changes from the original version
+- Uses a config over CLI
+- A few different libraries, like loguru and click over logging and argparser
+- Code is easier to deploy into other tools and such
+## Planned/WIP features
+- Finish reorganizing code
+- Implement RMVPE PE
+- Implement direct SOME inference (for less steps, basically)
+
 # Information
  This is a Python script for converting singing databases with HTS mono labels into the DiffSinger format. This Python script deals with sample segmentation to mostly ensure that samples have a maximum given length and a maximum amount of pauses in between. The recognized silence phonemes by this script are `sil`, `pau`, and `SP`. `AP` and `br` are special symbols considered as breaths. All silences turn into `SP` and all breaths turn into `AP`. It also assumes the labels have silences labeled at the start and end.
  
@@ -8,21 +17,12 @@
 
 ## Main Usage
 
-### Through Python
- 1. Have a Python install, preferably Python 3.8.
- 2. Install the `numpy`, `scipy`, `soundfile`, `parselmouth`, `pyworld`, and `librosa` libraries through pip like so:
- ```pip install numpy scipy soundfile librosa praat-parselmouth pyworld```
- 3. Pass the database with either method:
-    1. Drag and drop the database folder over the script (similar to [basic conversion](#basic-conversion)).
-    2. Run the script using the terminal and pass terminal arguments.
-        - You can access the terminal by typing `cmd` on the address bar in File Explorer. It will open command prompt with the current working directory as the one opened in File Explorer.
-    
-### Using portable version
- 1. Download the portable version in the releases page.
- 2. Pass the database with either method:
-    1. Drag and drop the database folder over `db_converter.bat` (similar to [basic conversion](#basic-conversion)).
-    2. Run the script using the terminal and pass terminal arguments.
-        - You can access the terminal by typing `cmd` on the address bar in File Explorer. It will open command prompt with the current working directory as the one opened in File Explorer.
+### Through Python (Conda recommeneded for Windows)
+ 1. Create an environment: `conda create -n db_converter python=3.12 -y`
+ 2. Install the requirements: `pip install -r requirements.txt`
+ 3. Run the script as follows (this is an example script): `python db_converter.py -L en {PATH_TO_NNSVS_DB}`
+
+All of the following is from the original and has not been updated for this version yet.
 
 ## Example commands
 

@@ -1,27 +1,36 @@
 import yaml
 
-hparams = {}
+class hparam:
+	def __init__(self, config: str = None, **kwargs):
+		super().__init__()
+		self.H = {}
+		self.load_config(config)
 
-def set_hparams(config: str = "configs/base.yaml"):
-	"""
-	Load hparams. Referenced "hparams.py" from openvpi/DiffSinger
-	"""
-	hparams_ = load_config(config)
+	@property
+	def keys(self) -> str:
+		'''
+		Print out hparams by calling "hparams.keys"
+		'''
+		keys = ""
+		keys += "Hparams\n"
+		for k, v in self.H.items():
+			keys += f"{k}: {v}, " 
+		return keys
+			
+	def load_config(self, config_path):
+		try:
+			with open(config_path, 'r', encoding='utf-8') as f:
+				self.H.clear()
+				self.H.update(yaml.safe_load(f))
+				f.close()
+			for k, v in self.H.items():
+				self.__setattr__(k, v)
+		except YAMLError as e:
+			print(f"Unable to load config: {e}")
 
-	global hparams
-
-	hparams.clear()
-	hparams.update(hparams_)
-
-	return hparams_
-
-def load_config(config_fn):
-	try:
-		with open(config_fn, 'r', encoding='utf-8') as f:
-			hparams_ = yaml.safe_load(f)
-	except:
-		print(f"Unable to laod config: {config_fn}")
-
-	return hparams_
-
-set_hparams()
+	def overwrite_key(self, key, new_value):
+		try:
+			self.H[key] = new_value
+			self.__setattr__(key, new_value)
+		except:
+			print(f"Unable to update key: {key} to new value: {new_value}")

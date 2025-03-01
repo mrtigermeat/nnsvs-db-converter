@@ -2,15 +2,14 @@ import parselmouth as pm
 import numpy as np
 
 from .base_pe import PE
-from utils.hparams import hparams
 
 class ParselmouthPE(PE):
-    def get_pitch(self, x, fs):
+    def get_pitch(self, x, fs, hparams):
         # from openvpi/DiffSinger/utils/binarizer_utils.py get_pitch_parselmouth
-        time_step = hparams['time_step']
-        f0_min = hparams['f0_min']
-        f0_max = hparams['f0_max']
-        voicing_threshold = hparams['voicing_threshold_midi']
+        time_step = hparams.time_step
+        f0_min = hparams.f0_min
+        f0_max = hparams.f0_max
+        voicing_threshold = hparams.voicing_threshold_midi
 
         hop_size = time_step * fs
         length = int(x.size / hop_size)

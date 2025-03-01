@@ -1,1 +1,1 @@
-from utils.hparams import hparams
+from utils.segment import Segment
